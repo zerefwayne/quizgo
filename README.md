@@ -1,2 +1,1 @@
-# quizgo
-A CLI Quiz built using Go
+![QuizGO](https://github.com/zerefwayne/quizgo/blob/master/.github/banner.png?raw=true)
