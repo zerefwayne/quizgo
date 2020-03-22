@@ -35,6 +35,11 @@ My vision for the project is to implement more and more features into the Quiz a
 
 - Always code on a new branch and make sure the pull request and commits are well documented and include screenshots wherever necessary.
 
+## Inspiration for the project
+
+https://courses.calhoun.io/courses/cor_gophercises
+
+This is a free video series which teaches you to build interesting applications using Go.
 
 ## License
 
