@@ -7,3 +7,10 @@ type Question struct {
 	Score int
 }
 
+func (question *Question) CheckAnswer(givenAnswer string) (bool, int){
+	if givenAnswer == question.Answer {
+		return true, question.Score
+	}
+	return false, 0
+}
+
