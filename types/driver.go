@@ -46,6 +46,8 @@ func (driver *Driver) Start() {
 
 		round.Score += pointsScored
 
+		fmt.Println("\033[H\033[2J")
+
 		if isCorrect {
 			fmt.Printf("Correct Answer! You scored %d points. Total points: %d\n\n", pointsScored, round.Score)
 		} else {
