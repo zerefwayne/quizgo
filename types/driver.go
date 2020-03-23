@@ -32,7 +32,7 @@ func (driver *Driver) Start() {
 	totalQuestions := round.TotalQuestions
 
 	for currentQuestion := 0; currentQuestion < totalQuestions; currentQuestion++ {
-		clearScreen()
+
 		question := round.QuestionAtIndex(currentQuestion)
 		fmt.Printf("Question %d/%d:\n\n", currentQuestion+1, totalQuestions)
 		fmt.Printf("%s\n\n", question.Statement)
