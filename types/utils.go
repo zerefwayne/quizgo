@@ -5,7 +5,10 @@ import (
 	"encoding/csv"
 	"io"
 	"os"
+	"os/exec"
+	"runtime"
 	"strconv"
+	"log"
 )
 
 func lineToOWA(line []string) *Question{
@@ -36,6 +39,23 @@ func parseCSV(csvFilePath string, questionBank *QuestionBank) error {
 		_ = questionBank.AddQuestion(question)
 	}
 
+	return nil
+}
+
+func clearScreen() {
+	os := runtime.GOOS
+	// if linux or mac`
+	if (os == "linux" || os == "darwin"){
+		cmd := exec.Command("clear")
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	} else if (os == "windows") {
+		cmd := exec.Command("cls")
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	} else {
+		log.Fatal("Unsupported Operating System! Can't clear your screen")
+	}
 	return nil
 }
 
