@@ -1,6 +1,7 @@
 package types
 
 import (
+	"flag"
 	"fmt"
 	"log"
 )
@@ -12,7 +13,13 @@ type Driver struct {
 func NewDriver() (*Driver, error) {
 
 	driver := new(Driver)
-	filePath := "./problems/addition.csv"
+
+	var filePath string
+
+	flag.StringVar(&filePath, "csv", "./problems/addition.csv",
+		"a csv file in the format of 'question,answer'")
+	flag.Parse()
+
 	questionBank, err := InitialiseQuestionBank(filePath)
 
 	if err != nil {
@@ -23,8 +30,6 @@ func NewDriver() (*Driver, error) {
 	driver.round = NewRound(questionBank)
 	return driver, nil
 }
-
-
 
 func (driver *Driver) Start() {
 
@@ -54,10 +59,6 @@ func (driver *Driver) Start() {
 			fmt.Printf("Incorrect Answer! Total Points: %d\n\n", round.Score)
 		}
 
-
 	}
 
 }
-
-
-
