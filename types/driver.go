@@ -14,13 +14,20 @@ func NewDriver() (*Driver, error) {
 
 	driver := new(Driver)
 
+	// Path of the input file
 	var filePath string
+	// Type of the input file (csv,json)
+	var sourceType string
 
-	flag.StringVar(&filePath, "csv", "./problems/addition.csv",
+	flag.StringVar(&filePath, "file", "./problems/addition.csv",
 		"a csv file in the format of 'question,answer'")
+
+	// acceptable values are csv and json
+	flag.StringVar(&sourceType, "type", "csv",
+		"the type of input used for the questions")
 	flag.Parse()
 
-	questionBank, err := InitialiseQuestionBank(filePath)
+	questionBank, err := InitialiseQuestionBank(filePath, sourceType)
 
 	if err != nil {
 		log.Fatal(err)
@@ -44,7 +51,11 @@ func (driver *Driver) Start() {
 
 		answer := ""
 
-		fmt.Scanf("%s", &answer)
+		_, err := fmt.Scanf("%s", &answer)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
 		fmt.Println()
 
 		isCorrect, pointsScored := question.CheckAnswer(answer)
