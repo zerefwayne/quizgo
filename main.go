@@ -2,20 +2,30 @@ package main
 
 import (
 	"fmt"
-	"github.com/zerefwayne/quizgo/types"
 	"log"
+	"quizgo/database"
+	"quizgo/types"
 )
 
 func main() {
-	driver, err := types.NewDriver()
-
+	_, err := database.Open()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("ERROR - Failed to open Database:", err)
+		return
+	}
+
+	driver, err := types.NewDriver()
+	if err != nil {
+		log.Fatal("ERROR - Failed to create new driver:", err)
 		return
 	} else {
 
 		for {
-			driver.Start()
+			score, err := driver.Start()
+			if err != nil {
+				log.Fatal("ERROR - Driver failed to start")
+				return
+			}
 
 			fmt.Printf("Game Over\n\n")
 			restart := ""
@@ -23,10 +33,10 @@ func main() {
 			fmt.Scanf("%s", &restart)
 
 			if restart != "y" {
+				fmt.Println("Final Score:", score)
 				break
 			}
 		}
-
 
 	}
 }
